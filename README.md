@@ -1,5 +1,5 @@
 # kat
-数据结构与算法
+工具箱
 
 
 **目标:**
@@ -12,4 +12,5 @@
 - [ ] 自动化
 - packages
   - [ ] LinkedList
+  - [ ] Stack
   - [ ] LRU
