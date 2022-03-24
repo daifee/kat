@@ -10,3 +10,6 @@
 - [ ] 发布到npm
 - [ ] monorepository
 - [ ] 自动化
+- packages
+  - [ ] LinkedList
+  - [ ] LRU
