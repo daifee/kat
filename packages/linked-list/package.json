@@ -2,7 +2,7 @@
   "name": "@daifee/linked-list",
   "version": "0.1.0",
   "description": "LinkedList",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

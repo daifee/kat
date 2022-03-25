@@ -1,0 +1,16 @@
+{
+  "include": [
+    "./packages/stack/src/**/*.ts",
+    "./packages/linked-list/src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@daifee/linked-list2": [
+        "./packages/linked-list/src"
+      ],
+      "@daifee/stack": [
+        "./packages/stack/src"
+      ]
+    }
+  }
+}
