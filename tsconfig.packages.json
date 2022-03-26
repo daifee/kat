@@ -5,7 +5,7 @@
   ],
   "compilerOptions": {
     "paths": {
-      "@daifee/linked-list2": [
+      "@daifee/linked-list": [
         "./packages/linked-list/src"
       ],
       "@daifee/stack": [
