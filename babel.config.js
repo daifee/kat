@@ -1,7 +1,9 @@
 
 
 
-module.exports = function () {
+module.exports = function (api) {
+
+  api.cache(true);
 
   return {
     "presets": [
