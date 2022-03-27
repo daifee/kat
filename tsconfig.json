@@ -1,9 +1,5 @@
 {
-  "extends": "./tsconfig.packages.json",
-  "include": [
-    "./packages/stack/src/**/*.ts",
-    "./packages/linked-list/src/**/*.ts"
-  ],
+  "extends": "./tsconfig.pkg.json",
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 

@@ -24,8 +24,7 @@
   },
   "homepage": "https://github.com/daifee/kat#readme",
   "workspaces": [
-    "packages/linked-list",
-    "packages/stack"
+    "packages/*"
   ],
   "devDependencies": {
     "@babel/cli": "^7.17.6",

@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/daifee/kat/issues"
   },
-  "homepage": "https://github.com/daifee/kat#readme"
+  "homepage": "https://github.com/daifee/kat#readme",
+  "dependencies": {
+    "events": "^3.3.0"
+  }
 }
