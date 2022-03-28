@@ -6,17 +6,18 @@ NODE := node
 BABEL := node_modules/.bin/babel
 NPM := npm
 
+babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
 bootstrap: clean
 	$(NPM) install
 	$(NODE) scripts/generators/tsconfig.pkg.js
 
 
-build:
-	echo "TODO: make build"
+build: clean-lib-all
+	$(MAKE) build-no-bundle
 
 watch:
-	echo "TODO: watch"
+	$(BABEL) $(babelparams) --watch
 
 
 # 安装的依赖
@@ -44,7 +45,7 @@ clean-dependencies-all:
 
 # 只构建，不打包
 build-no-bundle:
-	$(BABEL) --relative packages/*/src --extensions ".ts" -d ../lib --watch
+	$(BABEL) $(babelparams)
 
 
 test:
