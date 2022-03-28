@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/daifee/kat#readme",
   "dependencies": {
-    "events": "^3.3.0"
+    "@daifee/linked-list": "0.1.0"
   }
 }

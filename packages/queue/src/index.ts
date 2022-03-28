@@ -1,6 +1,6 @@
 import LinkedList from '@daifee/linked-list';
 
-export default class Stakc {
+export default class Queue {
 
 }
 

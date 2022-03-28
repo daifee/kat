@@ -4,29 +4,41 @@ SOURCES = packages
 
 NODE := node
 BABEL := node_modules/.bin/babel
-NPM := npm
+YARN := yarn
+ESLINT := node_modules/.bin/eslint
 
 babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
+# 
 bootstrap: clean
-	$(NPM) install
+	$(YARN) install
 	$(NODE) scripts/generators/tsconfig.pkg.js
 
 
+# 构建
 build: clean-lib-all
 	$(MAKE) build-no-bundle
+
+
+build-no-bundle:
+	$(BABEL) $(babelparams)
+
+
 
 watch:
 	$(BABEL) $(babelparams) --watch
 
 
-# 安装的依赖
-# 编译生成的目标文件
+test:
+	$(NODE) packages/stack/lib/index.js
+
+
+# 清除文件
 clean:
 	$(MAKE) clean-lib-all
 	$(MAKE) clean-dependencies-all
 
-# 清除生成的文件
+
 clean-lib-all:
 	$(foreach source, \
 		$(SOURCES), \
@@ -43,13 +55,12 @@ clean-dependencies-all:
 	)
 
 
-# 只构建，不打包
-build-no-bundle:
-	$(BABEL) $(babelparams)
 
+# lint
+lint: lint-js
 
-test:
-	$(NODE) packages/stack/lib/index.js
+lint-js:
+	$(ESLINT) "packages/*/src/**.ts"
 
 
 
