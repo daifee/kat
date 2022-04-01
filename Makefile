@@ -60,9 +60,12 @@ clean-dependencies-all:
 lint: lint-js
 
 lint-js:
-	$(ESLINT) "packages/*/src/**.ts"
+	$(ESLINT) packages/** scripts/** --ext .js --ext .ts
 
+fix: fix-js
 
+fix-js:
+	$(ESLINT) packages/** scripts/** --ext .js --ext .ts --fix
 
 define clean-dependencies
 	rm -rf $(1)/*/node_modules

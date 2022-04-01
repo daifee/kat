@@ -17,15 +17,16 @@ function getPackages(subRoot) {
       return {
         name: `@daifee/${dir}`,
         path: path.resolve(root, subRoot, dir),
-        relativePath: `./${subRoot}/${dir}`
+        relativePath: `./${subRoot}/${dir}`,
       };
     })
     // 过滤条件1
     .filter((item) => {
       let filteredMsg = '';
+      const metaFile = path.resolve(item.path, 'package.json');
 
       try {
-        const metaFile = path.resolve(item.path, 'package.json');
+        // eslint-disable-next-line
         const meta = require(metaFile);
 
         if (meta.name !== item.name) {
@@ -35,6 +36,7 @@ function getPackages(subRoot) {
         filteredMsg = `缺少文件：${metaFile}`;
       }
       // log
+      // eslint-disable-next-line
       console.warn(filteredMsg);
       return !filteredMsg;
     })
@@ -46,21 +48,21 @@ function getPackages(subRoot) {
 }
 
 const packagesRoot = [
-  ...getPackages('packages')
+  ...getPackages('packages'),
 ];
 
 const config = {
   include: packagesRoot.map((pkg) => {
-    return `${pkg.relativePath}/src/**/*.ts`
+    return `${pkg.relativePath}/src/**/*.ts`;
   }),
   compilerOptions: {
     paths: Object.fromEntries(packagesRoot.map((pkg) => {
-      return [pkg.name, [`${pkg.relativePath}/src`]]
-    }))
-  }
+      return [pkg.name, [`${pkg.relativePath}/src`]];
+    })),
+  },
 };
 
 fs.writeFileSync(
   path.resolve(root, 'tsconfig.pkg.json'),
-  JSON.stringify(config, null, 2)
+  JSON.stringify(config, null, 2),
 );

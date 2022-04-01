@@ -11,7 +11,6 @@
    - Babel
 4. 代码检查
    - eslint
-   - prettier
    - lint-staged
    - husky
 5. 测试工具

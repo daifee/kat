@@ -16,5 +16,6 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'arrow-body-style': ['error', 'always'],
   },
 };

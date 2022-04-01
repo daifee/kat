@@ -43,8 +43,5 @@
     "packages/linked-list",
     "packages/queue",
     "packages/stack"
-  ],
-  "lint-staged": {
-    "*.ts": "eslint --cache --fix"
-  }
+  ]
 }
