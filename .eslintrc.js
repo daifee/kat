@@ -17,5 +17,23 @@ module.exports = {
   ],
   rules: {
     'arrow-body-style': ['error', 'always'],
+    'func-names': 0,
+    'no-multiple-empty-lines': ['error', {
+      max: 2,
+      maxEOF: 0,
+    }],
   },
+  overrides: [
+    {
+      files: [
+        '**/*.test.js',
+      ],
+      env: {
+        jest: true,
+      },
+      plugins: [
+        'jest',
+      ],
+    },
+  ],
 };

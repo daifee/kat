@@ -14,3 +14,4 @@
    - lint-staged
    - husky
 5. 测试工具
+   - jest

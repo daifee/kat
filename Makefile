@@ -6,6 +6,7 @@ NODE := node
 BABEL := node_modules/.bin/babel
 YARN := yarn
 ESLINT := node_modules/.bin/eslint
+JEST := node_modules/.bin/jest
 
 babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
@@ -30,7 +31,7 @@ watch:
 
 
 test:
-	$(NODE) packages/stack/lib/index.js
+	$(JEST)
 
 
 # 清除文件
