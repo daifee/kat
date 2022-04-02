@@ -17,11 +17,11 @@ bootstrap: clean
 
 
 # 构建
-build: clean-lib-all
+build:
 	$(MAKE) build-no-bundle
 
 
-build-no-bundle:
+build-no-bundle: clean-lib-all
 	$(BABEL) $(babelparams)
 
 
@@ -30,7 +30,7 @@ watch:
 	$(BABEL) $(babelparams) --watch
 
 
-test:
+test: build-no-bundle
 	$(JEST)
 
 
