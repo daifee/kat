@@ -28,27 +28,6 @@ class ListNode {
   }
 
 }
-/**
- * 插入
- * - add
- * - addHead
- * - addTail
- */
-
-/**
- * 检索
- * - get
- * - getHead
- * - getTail
- */
-
-/**
- * 删除
- * - delete
- * - deleteHead
- * - deleteTail
- */
-
 
 _Symbol$iterator = Symbol.iterator;
 
@@ -95,12 +74,16 @@ class LinkedList extends LinkedListIterator {
     this.tail = null;
   }
 
-  size() {
+  get size() {
     return this._size;
   }
 
+  set size(num) {
+    this._size = num;
+  }
+
   add(index, val) {
-    if (index < 0 || index > this.size()) {
+    if (index < 0 || index > this.size) {
       return;
     }
 
@@ -109,7 +92,7 @@ class LinkedList extends LinkedListIterator {
       return;
     }
 
-    if (index === this.size()) {
+    if (index === this.size) {
       this.addTail(val);
       return;
     }
@@ -136,7 +119,7 @@ class LinkedList extends LinkedListIterator {
     node.prev = prev;
     node.next = current;
     current.prev = node;
-    this._size += 1;
+    this.size += 1;
   }
 
   addHead(val) {
@@ -151,7 +134,7 @@ class LinkedList extends LinkedListIterator {
       this.tail = node;
     }
 
-    this._size += 1;
+    this.size += 1;
   }
 
   addTail(val) {
@@ -166,11 +149,26 @@ class LinkedList extends LinkedListIterator {
       this.tail = node;
     }
 
-    this._size += 1;
-  } // get(index: number): V | void {
-  //   return this.head?.val;
-  // }
+    this.size += 1;
+  }
 
+  get(index) {
+    var _cursor;
+
+    let cursor = this.head;
+    let count = 0;
+
+    while (cursor) {
+      if (index === count) {
+        break;
+      }
+
+      cursor = cursor.next;
+      count += 1;
+    }
+
+    return (_cursor = cursor) === null || _cursor === void 0 ? void 0 : _cursor.val;
+  }
 
   getHead() {
     var _this$head;
@@ -182,6 +180,76 @@ class LinkedList extends LinkedListIterator {
     var _this$tail;
 
     return (_this$tail = this.tail) === null || _this$tail === void 0 ? void 0 : _this$tail.val;
+  }
+
+  delete(index) {
+    var _target, _target2;
+
+    if (index < 0 || index >= this.size) return;
+
+    if (index === 0) {
+      this.deleteHead();
+      return;
+    }
+
+    if (index === this.size - 1) {
+      this.deleteTail();
+      return;
+    }
+
+    this.size -= 1;
+    let target = this.head;
+    let i = 0;
+
+    while (target) {
+      if (i === index) {
+        break;
+      }
+
+      target = target.next;
+      i += 1;
+    } // `target`不是 `head`, `tail`; 所以必然存在 `prev`, `next`
+
+
+    const prev = (_target = target) === null || _target === void 0 ? void 0 : _target.prev;
+    const next = (_target2 = target) === null || _target2 === void 0 ? void 0 : _target2.next;
+    prev.next = next;
+    next.prev = prev;
+  }
+
+  deleteHead() {
+    if (!this.head) return;
+
+    if (this.head === this.tail) {
+      this.size = 0;
+      this.head = null;
+      this.tail = null;
+      return;
+    }
+
+    this.size -= 1;
+    this.head = this.head.next;
+
+    if (!this.head) {
+      this.tail = null;
+    } else {
+      this.head.prev = null;
+    }
+  }
+
+  deleteTail() {
+    if (!this.tail) return;
+
+    if (this.tail === this.head) {
+      this.size = 0;
+      this.tail = null;
+      this.head = null;
+      return;
+    }
+
+    this.size -= 1;
+    this.tail = this.tail.prev;
+    this.tail.next = null;
   }
 
 }

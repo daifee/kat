@@ -10,7 +10,7 @@ JEST := node_modules/.bin/jest
 
 babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
-# 
+#
 bootstrap: clean
 	$(YARN) install
 	$(NODE) scripts/generators/tsconfig.pkg.js
@@ -33,6 +33,8 @@ watch:
 test: build-no-bundle
 	$(JEST)
 
+test-only:
+	$(JEST)
 
 # 清除文件
 clean:
