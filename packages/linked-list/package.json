@@ -3,17 +3,24 @@
   "version": "0.1.0",
   "description": "LinkedList",
   "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daifee/kat.git"
+    "url": "git+https://github.com/daifee/kat.git",
+    "directory": "packages/linked-list"
   },
   "keywords": [
     "LinkedList"
   ],
-  "author": "daifee",
+  "author": {
+    "name": "daifee",
+    "email": "mr_zhangjiayong@163.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/daifee/kat/issues"
