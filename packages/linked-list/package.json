@@ -1,6 +1,6 @@
 {
   "name": "@daifee/linked-list",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LinkedList",
   "main": "./lib/index.js",
   "exports": {
@@ -28,5 +28,8 @@
   "homepage": "https://github.com/daifee/kat#readme",
   "devDependencies": {
     "@jest/globals": "^27.5.1"
+  },
+  "dependencies": {
+    "@daifee/linked-list": "^0.1.0"
   }
 }
