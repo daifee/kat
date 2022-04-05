@@ -5,7 +5,6 @@
   "main": "index.js",
   "author": "daifee",
   "license": "MIT",
-  "private": true,
   "dependencies": {
     "@daifee/linked-list": "0.1.0"
   }
