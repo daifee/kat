@@ -48,5 +48,6 @@
     "packages/linked-list",
     "packages/queue",
     "packages/stack"
-  ]
+  ],
+  "packageManager": "yarn@3.2.0"
 }
