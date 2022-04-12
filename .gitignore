@@ -118,3 +118,7 @@ dist
 # Documentation here: https://yarnpkg.com/features/zero-installs
 # !.yarn/cache
 .pnp.*
+
+
+# project
+packages/*/lib

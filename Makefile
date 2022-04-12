@@ -2,7 +2,7 @@
 
 SOURCES = packages
 
-NODE := node
+NODE := $(yarn node)
 BABEL := node_modules/.bin/babel
 YARN := yarn
 ESLINT := node_modules/.bin/eslint
