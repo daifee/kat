@@ -1358,34 +1358,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@daifee/linked-list@^0.1.0, @daifee/linked-list@workspace:packages/linked-list":
+"@daifee/linked-list@workspace:^, @daifee/linked-list@workspace:packages/linked-list":
   version: 0.0.0-use.local
   resolution: "@daifee/linked-list@workspace:packages/linked-list"
   languageName: unknown
   linkType: soft
 
-"@daifee/linked-list@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@daifee/linked-list@npm:0.1.0"
-  dependencies:
-    "@daifee/linked-list": ^0.1.0
-  checksum: 7d41a55a690c4ac82fff10af7d52de5188f9a6fd9d9cddaafec75bffa6a5b6f0cbec89540aa3d4abb831892230482cdf142f4eaff01526fb3ca61bd97495cd10
-  languageName: node
-  linkType: hard
-
 "@daifee/queue@workspace:packages/queue":
   version: 0.0.0-use.local
   resolution: "@daifee/queue@workspace:packages/queue"
   dependencies:
-    "@daifee/linked-list": 0.1.0
-  languageName: unknown
-  linkType: soft
-
-"@daifee/stack@workspace:packages/stack":
-  version: 0.0.0-use.local
-  resolution: "@daifee/stack@workspace:packages/stack"
-  dependencies:
-    "@daifee/linked-list": 0.1.0
+    "@daifee/linked-list": "workspace:^"
   languageName: unknown
   linkType: soft
 

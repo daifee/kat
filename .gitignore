@@ -122,3 +122,4 @@ dist
 
 # project
 packages/*/lib
+tsconfig.pkg.json
