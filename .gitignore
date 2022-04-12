@@ -123,3 +123,4 @@ dist
 # project
 packages/*/lib
 tsconfig.pkg.json
+note.local.md
