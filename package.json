@@ -45,7 +45,7 @@
     "typescript": "^4.6.2"
   },
   "workspaces": [
-    "packages/*"
+    "packages/linked-list"
   ],
   "packageManager": "yarn@3.2.0"
 }
