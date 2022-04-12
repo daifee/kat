@@ -1,11 +1,11 @@
 {
   "name": "@daifee/queue",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "queue",
   "main": "index.js",
   "author": "daifee",
   "license": "MIT",
   "dependencies": {
-    "@daifee/linked-list": "0.1.0"
+    "@daifee/linked-list": "workspace:^"
   }
 }
