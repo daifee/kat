@@ -8,7 +8,7 @@ on:
       name:
         description: 包名称
         required: true
-        default: \@daifee
+        default: @daifee
       version:
         description: 新版本号
         required: true
