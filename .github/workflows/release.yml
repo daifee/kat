@@ -1,6 +1,6 @@
 name: Release
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       username:
         description: 'A username passed from the caller workflow'
@@ -15,3 +15,4 @@ jobs:
     steps:
       - name: Print the input name to STDOUT
         run: echo The username is ${{ inputs.username }}
+
