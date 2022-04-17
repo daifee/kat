@@ -41,7 +41,7 @@ jobs:
           git config user.email "bot@daifee.com"
       - name: 更新[package.json].version
         run: |
-          yarn install
-          make new-version name=${{ inputs.name }} version=${{ inputs.version }}
+          echo ${{ inputs.name }}
+          echo ${{ inputs.version }}
       - name: view
         run: cat ./packages/queue/package.json
