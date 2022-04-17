@@ -41,5 +41,5 @@ jobs:
           git config user.email "bot@daifee.com"
       - name: 更新[package.json].version
         run: make new-version name=${{ inputs.name }} version=${{ inputs.version }}
-      - log:
+      - name: view
         run: cat ./packages/queue/package.json
