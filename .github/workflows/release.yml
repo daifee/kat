@@ -1,49 +1,17 @@
 name: Release
-
 on:
-  push:
-    tags: ["release*"]
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      package_name:
-        description: 包名称
+      username:
+        description: 'A username passed from the caller workflow'
+        default: 'john-doe'
+        required: false
         type: string
-        required: true
-        default: "@daifee"
-      package_version:
-        description: 新版本号
-        type: string
-        required: true
 
 jobs:
-  log-updates:
-    name: 记录文件变更
+  print-username:
     runs-on: ubuntu-latest
-    steps:
-      - name: 检出
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: 列出变化的文件
-        run: git diff --name-only HEAD^..HEAD
 
-  git-version:
-    name: 创建 git tag
-    runs-on: ubuntu-latest
-    needs: log-updates
-    if: github.event_name == 'workflow_dispatch'
-    outputs:
-      branch: ${{ steps.push.outputs.branch }}
     steps:
-      - name: 检出
-        uses: actions/checkout@v3
-      - name: 设置git用户
-        run: |
-          git config user.name "Bot"
-          git config user.email "bot@daifee.com"
-      - name: 更新[package.json].version
-        run: |
-          echo ${{ inputs.package_name }}
-          echo ${{ inputs.package_version }}
-      - name: view
-        run: cat ./packages/queue/package.json
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.username }}
