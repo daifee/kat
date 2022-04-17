@@ -5,12 +5,12 @@ on:
     tags: ["release*"]
   workflow_dispatch:
     inputs:
-      name:
+      package_name:
         description: 包名称
         type: string
         required: true
         default: "@daifee"
-      version:
+      package_version:
         description: 新版本号
         type: string
         required: true
@@ -43,7 +43,7 @@ jobs:
           git config user.email "bot@daifee.com"
       - name: 更新[package.json].version
         run: |
-          echo ${{ on.workflow_dispatch.inputs.name }}
-          echo ${{ inputs.version }}
+          echo ${{ inputs.package_name }}
+          echo ${{ inputs.package_version }}
       - name: view
         run: cat ./packages/queue/package.json
