@@ -10,6 +10,7 @@ JEST := node_modules/.bin/jest
 
 babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
+
 #
 bootstrap: clean
 	$(YARN) install
@@ -69,6 +70,14 @@ fix: fix-js
 
 fix-js:
 	$(ESLINT) packages/** scripts/** --ext .js --ext .ts --fix
+
+
+new-version:
+	name=$(name)
+	version=$(version)
+	$(NODE) ./scripts/release/new-version.js --name $(name) --version $(version)
+
+
 
 define clean-dependencies
 	rm -rf $(1)/*/node_modules

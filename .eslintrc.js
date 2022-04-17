@@ -46,5 +46,16 @@ module.exports = {
         'jest',
       ],
     },
+    {
+      files: [
+        'scripts/**',
+      ],
+      env: {
+        node: true,
+      },
+      rules: {
+        'import/no-extraneous-dependencies': 0,
+      },
+    },
   ],
 };
