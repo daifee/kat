@@ -28,15 +28,18 @@ jobs:
           tag="release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
           echo "::set-output name=tag::${tag}"
       - name: 更新 package.version
-        run: make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+        # run: make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
       - name: 提交代码
-        run: |
-          git config user.name "robot"
-          git config user.email "robot@daifee.com"
-          git add --all
-          git commit -m "${tag}"
-          git tag ${tag}
-          git push --tags
+        run: echo $tag
+        run: echo ${tag}
+        run: echo "${tag}"
+        # run: |
+          # git config user.name "robot"
+          # git config user.email "robot@daifee.com"
+          # git add --all
+          # git commit -m "${tag}"
+          # git tag ${tag}
+          # git push --tags
 
   npm-release:
     name: 发布到NPM
