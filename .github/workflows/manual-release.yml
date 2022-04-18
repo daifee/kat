@@ -27,13 +27,12 @@ jobs:
       - name: 定义git tag
         id: define_tag
         run: |
-          echo "::set-output name=git_tag::${{ GIT_TAG }}"
+          echo "::set-output name=git_tag::${GIT_TAG}"
       - name: 提交代码
         run: |
           echo $GIT_TAG
           echo ${GIT_TAG}
           echo "${GIT_TAG}"
-          echo "${{ GIT_TAG }}"
 
   npm-publish:
     name: 发布到NPM
