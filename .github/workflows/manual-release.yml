@@ -30,18 +30,14 @@ jobs:
       - name: 更新 package.version
         run: |
           make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
-          cat packages/queue/package.json
-          git status
       - name: 提交代码
         run: |
-          cat packages/queue/package.json
-          git status
           git config user.name "robot"
           git config user.email "robot@daifee.com"
           git add --all
           git commit -m "${GIT_TAG}"
           git tag ${GIT_TAG}
-          git push --tags
+          git push --all
 
   npm-publish:
     name: 发布到NPM
