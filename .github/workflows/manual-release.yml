@@ -28,12 +28,13 @@ jobs:
           tag="release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
           echo $tag
           echo ${tag}
+          echo "${tag}"
           echo "::set-output name=tag::${tag}"
-        run: echo $tag
       - name: 提交代码
-        run: echo $tag
-        run: echo ${tag}
-        run: echo "${tag}"
+        run: |
+          echo $tag
+          echo ${tag}
+          echo "${tag}"
 
   npm-release:
     name: 发布到NPM
