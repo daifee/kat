@@ -17,31 +17,30 @@ jobs:
   update-package-version:
     name: 更新版本号
     runs-on: ubuntu-latest
+    env:
+      GIT_TAG: "release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
     outputs:
-      tag: ${{ steps.define_tag.outputs.tag }}
+      git_tag: ${{ steps.define_tag.outputs.git_tag }}
     steps:
       - name: 检出
         uses: actions/checkout@v3
       - name: 定义git tag
         id: define_tag
         run: |
-          tag="release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
-          echo $tag
-          echo ${tag}
-          echo "${tag}"
-          echo "::set-output name=tag::${tag}"
+          echo "::set-output name=git_tag::${{ GIT_TAG }}"
       - name: 提交代码
         run: |
-          echo $tag
-          echo ${tag}
-          echo "${tag}"
+          echo $GIT_TAG
+          echo ${GIT_TAG}
+          echo "${GIT_TAG}"
+          echo "${{ GIT_TAG }}"
 
-  npm-release:
+  npm-publish:
     name: 发布到NPM
     runs-on: ubuntu-latest
     needs: update-package-version
     steps:
       - name: publish
-        run: make npm-publish tag=${{ needs.update-package-version.outputs.tag }}
+        run: make npm-publish tag=${{ needs.update-package-version.outputs.git_tag }}
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
