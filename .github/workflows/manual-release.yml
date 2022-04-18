@@ -18,7 +18,7 @@ jobs:
     name: 更新版本号
     runs-on: ubuntu-latest
     env:
-      GIT_TAG: "release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
+      GIT_TAG: "release-${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
     outputs:
       git_tag: ${{ steps.define_tag.outputs.git_tag }}
     steps:
