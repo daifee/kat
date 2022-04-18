@@ -38,7 +38,8 @@ jobs:
           git add --all
           git commit -m "${GIT_TAG}"
           git tag ${GIT_TAG}
-          git push --all --tags
+          git push --all
+          git push --tags
 
   npm-publish:
     name: 发布到NPM
