@@ -34,12 +34,12 @@ jobs:
           echo ${GIT_TAG}
           echo "${GIT_TAG}"
 
-  npm-release:
+  npm-publish:
     name: 发布到NPM
     runs-on: ubuntu-latest
     needs: update-package-version
     steps:
       - name: publish
-        run: make npm-publish tag=${{ needs.update-package-version.outputs.git_tag }}
+        run: make npm-release tag=${{ needs.update-package-version.outputs.git_tag }}
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
