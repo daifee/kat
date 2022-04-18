@@ -28,9 +28,14 @@ jobs:
         id: define_tag
         run: echo "::set-output name=git_tag::${GIT_TAG}"
       - name: 更新 package.version
-        run: make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+        run: |
+          make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+          cat packages/queue/package.json
+          git status
       - name: 提交代码
         run: |
+          cat packages/queue/package.json
+          git status
           git config user.name "robot"
           git config user.email "robot@daifee.com"
           git add --all
