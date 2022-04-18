@@ -2,10 +2,13 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      username:
-        description: 'A username passed from the caller workflow'
-        default: 'john-doe'
-        required: false
+      name:
+        description: 包名称
+        type: string
+        required: true
+        default: "@daifee"
+      version:
+        description: 新版本号
         type: string
 
 jobs:
@@ -13,6 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print the input name to STDOUT
-        run: echo The username is ${{ github.event.inputs.username }}
-
+      - name: 检出
+        uses: actions/checkout@v3
+      - name: 设置git用户
+        run: |
+          git config user.name "Bot"
+          git config user.email "bot@daifee.com"
+      - name: 更新[package.json].version
+        run: |
+          echo ${{ on.workflow_dispatch.inputs.name }}
+          echo ${{ inputs.version }}
+      - name: view
+        run: cat ./packages/queue/package.json
