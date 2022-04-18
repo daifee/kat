@@ -50,8 +50,9 @@ jobs:
         uses: actions/checkout@v3
       - name: publish
         run: |
-          git pull
-          git log
+          git fetch --all --tags --prune
+          git checkout tags/${{ needs.update-package-version.outputs.git_tag }} -b tempbanch
+          echo "latest-commit-id: $(git log)"
           make npm-publish tag=${{ needs.update-package-version.outputs.git_tag }}
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
