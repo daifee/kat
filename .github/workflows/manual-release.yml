@@ -40,5 +40,5 @@ jobs:
     needs: update-package-version
     steps:
       - name: publish
-        make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+        run: make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
 
