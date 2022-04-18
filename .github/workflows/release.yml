@@ -13,9 +13,19 @@ on:
         required: true
 
 jobs:
-  package-version:
+  log-changes:
+    name: 记录变更文件
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出
+        uses: actions/checkout@v2
+      - name: 列出变更文件
+        run: git diff --name-only HEAD^..HEAD
+
+  update-version:
     name: 更新版本号
     runs-on: ubuntu-latest
+    needs: log-changes
     steps:
       - name: 检出
         uses: actions/checkout@v3
@@ -30,4 +40,15 @@ jobs:
           git add --all
           git commit -m "release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
           git tag "release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
-          git push
+          git push --tags
+  npm-release:
+    name: 发布到NPM
+    runs-on: ubuntu-latest
+    needs: update-version
+    steps:
+      - name: build and test
+        run: make pre-publish
+      - name: publish
+        run: make npm-publish
+        env: 
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

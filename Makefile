@@ -31,11 +31,9 @@ watch:
 	$(BABEL) $(babelparams) --watch
 
 
-test: build-no-bundle
+test: lint
 	$(JEST)
 
-test-only:
-	$(JEST)
 
 # 清除文件
 clean:
@@ -78,6 +76,12 @@ new-version:
 	$(YARN) install
 	$(NODE) ./scripts/release/new-version.js --name $(name) --version $(version)
 
+pre-publish:
+	$(MAKE) build
+	$(MAKE) test
+
+npm-publish:
+	
 
 
 define clean-dependencies
