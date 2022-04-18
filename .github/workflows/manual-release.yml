@@ -34,7 +34,7 @@ jobs:
           echo ${GIT_TAG}
           echo "${GIT_TAG}"
 
-  npm-publish:
+  npm-release:
     name: 发布到NPM
     runs-on: ubuntu-latest
     needs: update-package-version
