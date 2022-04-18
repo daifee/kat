@@ -38,7 +38,7 @@ jobs:
           git add --all
           git commit -m "${GIT_TAG}"
           git tag ${GIT_TAG}
-          git push --all
+          git push --all --tags
 
   npm-publish:
     name: 发布到NPM
@@ -47,11 +47,6 @@ jobs:
     steps:
       - name: 检出
         uses: actions/checkout@v3
-      - name: test
-        run: |
-          git pull
-          git log
-          cat packages/queue/package.json
       - name: publish
         run: make npm-publish tag=${{ needs.update-package-version.outputs.git_tag }}
         env:
