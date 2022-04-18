@@ -1,4 +1,5 @@
 name: Manual Release
+
 on:
   workflow_dispatch:
     inputs:
@@ -13,18 +14,8 @@ on:
         required: true
 
 jobs:
-  log-changes:
-    name: 记录变更文件
-    runs-on: ubuntu-latest
-    steps:
-      - name: 检出
-        uses: actions/checkout@v3
-      - name: 列出变更文件
-        run: git diff --name-only HEAD^..HEAD
-
   update-package-version:
     name: 更新版本号
-    runs-on: ubuntu-latest
     needs: log-changes
     outputs:
       tag: ${{ steps.define_tag.outputs.tag }}

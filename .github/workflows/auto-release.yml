@@ -1,4 +1,4 @@
-name: Release
+name: Auto Release
 on:
   push:
     tags: ["release-*"]
@@ -10,7 +10,5 @@ jobs:
     steps:
       - name: 检出
         uses: actions/checkout@v3
-      - name: 列出变更文件
-        run: git diff --name-only HEAD^..HEAD
       - name: 输出 tag name
         run: echo ${{ GITHUB_REF_NAME }}
