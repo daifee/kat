@@ -16,6 +16,7 @@ on:
 jobs:
   update-package-version:
     name: 更新版本号
+    runs-on: ubuntu-latest
     needs: log-changes
     outputs:
       tag: ${{ steps.define_tag.outputs.tag }}
