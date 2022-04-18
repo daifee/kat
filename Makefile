@@ -70,18 +70,19 @@ fix-js:
 	$(ESLINT) packages/** scripts/** --ext .js --ext .ts --fix
 
 
-new-version:
+update-package-version:
 	name=$(name)
 	version=$(version)
 	$(YARN) install
-	$(NODE) ./scripts/release/new-version.js --name $(name) --version $(version)
+	$(NODE) ./scripts/release/update-package-version.js --name $(name) --version $(version)
 
 pre-publish:
 	$(MAKE) build
 	$(MAKE) test
 
-npm-publish:
-	
+npm-publish: pre-publish
+	$(NODE) ./scripts/release/publish.js --tag $(tag)
+
 
 
 define clean-dependencies

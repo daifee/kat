@@ -1,6 +1,6 @@
 {
   "name": "@daifee/queue",
-  "version": "0.1.10",
+  "version": "0.1.15",
   "description": "queue",
   "main": "index.js",
   "author": "daifee",

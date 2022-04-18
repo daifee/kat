@@ -1,0 +1,58 @@
+name: Manual Release
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 包名称
+        type: string
+        required: true
+        default: "@daifee"
+      version:
+        description: 新版本号
+        type: string
+        required: true
+
+jobs:
+  log-changes:
+    name: 记录变更文件
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出
+        uses: actions/checkout@v2
+      - name: 列出变更文件
+        run: git diff --name-only HEAD^..HEAD
+
+  update-package-version:
+    name: 更新版本号
+    runs-on: ubuntu-latest
+    needs: log-changes
+    outputs:
+      tag: ${{ steps.define_tag.outputs.tag }}
+    steps:
+      - name: 检出
+        uses: actions/checkout@v3
+      - name: 定义git tag
+        id: define_tag
+        run: |
+          tag="release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
+          echo "::set-output name=tag::${tag}"
+      - name: 更新 package.version
+        run: make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+      - name: 提交代码
+        run: |
+          git config user.name "robot"
+          git config user.email "robot@daifee.com"
+          git add --all
+          git commit -m "${tag}"
+          git tag ${tag}
+          git push --tags
+
+  npm-release:
+    name: 发布到NPM
+    runs-on: ubuntu-latest
+    needs: update-package-version
+    steps:
+      - name: publish
+        run: make npm-publish tag=${{ needs.update-package-version.outputs.tag }}
+        env:
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
