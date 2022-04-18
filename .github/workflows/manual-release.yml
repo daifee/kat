@@ -27,6 +27,8 @@ jobs:
       - name: 定义git tag
         id: define_tag
         run: echo "::set-output name=git_tag::${GIT_TAG}"
+      - name: 更新 package.version
+        run: make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
       - name: 提交代码
         run: |
           git config user.name "robot"
