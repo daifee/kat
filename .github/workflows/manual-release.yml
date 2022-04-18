@@ -49,6 +49,9 @@ jobs:
       - name: 检出
         uses: actions/checkout@v3
       - name: publish
-        run: make npm-publish tag=${{ needs.update-package-version.outputs.git_tag }}
+        run: |
+          git pull
+          git log
+          make npm-publish tag=${{ needs.update-package-version.outputs.git_tag }}
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
