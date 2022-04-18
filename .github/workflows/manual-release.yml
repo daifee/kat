@@ -30,7 +30,6 @@ jobs:
           echo ${tag}
           echo "::set-output name=tag::${tag}"
         run: echo $tag
-      - name: 更新 package.version
       - name: 提交代码
         run: echo $tag
         run: echo ${tag}
