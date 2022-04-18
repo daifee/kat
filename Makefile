@@ -77,6 +77,7 @@ update-package-version:
 	$(NODE) ./scripts/release/update-package-version.js --name $(name) --version $(version)
 
 pre-publish:
+	$(MAKE) bootstrap
 	$(MAKE) build
 	$(MAKE) test
 
