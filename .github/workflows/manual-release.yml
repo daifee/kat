@@ -40,6 +40,5 @@ jobs:
     needs: update-package-version
     steps:
       - name: publish
-        run: make npm-release tag=${{ needs.update-package-version.outputs.git_tag }}
-        env:
-          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+
