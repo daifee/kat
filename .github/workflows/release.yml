@@ -10,21 +10,24 @@ on:
       version:
         description: 新版本号
         type: string
+        required: true
 
 jobs:
-  print-username:
+  package-version:
+    name: 更新版本号
     runs-on: ubuntu-latest
-
     steps:
       - name: 检出
         uses: actions/checkout@v3
       - name: 设置git用户
         run: |
-          git config user.name "Bot"
-          git config user.email "bot@daifee.com"
-      - name: 更新[package.json].version
+          git config user.name "robot"
+          git config user.email "robot@daifee.com"
+      - name: 更新 package.version
+        run: make new-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
+      - name: 提交代码
         run: |
-          echo ${{ on.workflow_dispatch.inputs.name }}
-          echo ${{ inputs.version }}
-      - name: view
-        run: cat ./packages/queue/package.json
+          git add --all
+          git commit -m "release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
+          git tag "release-${{ github.event.inputs.name }}-${{ github.event.inputs.version }}"
+          git push

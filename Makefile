@@ -75,6 +75,7 @@ fix-js:
 new-version:
 	name=$(name)
 	version=$(version)
+	$(YARN) install
 	$(NODE) ./scripts/release/new-version.js --name $(name) --version $(version)
 
 
