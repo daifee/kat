@@ -34,8 +34,8 @@ jobs:
           git config user.name "robot"
           git config user.email "robot@daifee.com"
           git add --all
-          git commit -m "${tag}"
-          git tag ${tag}
+          git commit -m "${GIT_TAG}"
+          git tag ${GIT_TAG}
           git push --tags
 
   npm-publish:
