@@ -80,9 +80,9 @@ pre-publish:
 	$(MAKE) build
 	$(MAKE) test
 
-npm-publish:
-	$(MAKE) pre-publish
-	$(NODE) ./scripts/release/publish.js --tag $(tag)
+npm-release:
+	echo "--------"
+	echo $tag
 
 
 
