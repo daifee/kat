@@ -49,6 +49,7 @@ jobs:
         uses: actions/checkout@v3
       - name: test
         run: |
+          git pull
           git log
           cat packages/queue/package.json
       - name: publish
