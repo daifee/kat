@@ -3,6 +3,10 @@ on:
   push:
     tags: ["release-*"]
 
+env:
+  GIT_TAG: ${GITHUB_REF_NAME}
+  GIT_BRANCH: release-${GIT_TAG}
+
 jobs:
   log-changes:
     name: 记录变更文件
@@ -11,4 +15,7 @@ jobs:
       - name: 检出
         uses: actions/checkout@v3
       - name: 输出 tag name
-        run: echo ${GITHUB_REF_NAME}
+        run: |
+          echo ${GITHUB_REF_NAME}
+          echo ${GIT_TAG}
+          echo ${GIT_BRANCH}
