@@ -4,33 +4,33 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 包名称
+        description: 包的名称 package.json.name
         type: string
         required: true
-        default: "@daifee"
+        default: "@daifee/"
       version:
-        description: 新版本号
+        description: 包的新版本号 package.json.version
         type: string
+        default: "0.0.0"
         required: true
+
+env:
+  # 标签包含了「名称」、「版本」信息：@daifee/linked-list@0.0.0
+  GIT_TAG: "${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
+  GIT_BRANCH: release-${GIT_TAG}
 
 jobs:
   update-package-version:
     name: 更新版本号
     runs-on: ubuntu-latest
-    env:
-      GIT_TAG: "release-${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
-    outputs:
-      git_tag: ${{ steps.define_tag.outputs.git_tag }}
     steps:
       - name: 检出
         uses: actions/checkout@v3
-      - name: 定义git tag
-        id: define_tag
-        run: echo "::set-output name=git_tag::${GIT_TAG}"
       - name: 更新 package.version
         run: |
-          make update-package-version name=${{ github.event.inputs.name }} version=${{ github.event.inputs.version }}
-          git status
+          make update-package-version tag=${GIT_TAG}
+      - name: 查看文件变更
+        run: git status
       - name: 提交代码
         run: |
           git config user.name "robot"
@@ -38,8 +38,9 @@ jobs:
           git add --all
           git commit -m "${GIT_TAG}"
           git tag ${GIT_TAG}
-          git push --all
-          git push --tags
+      - name: 推送到Github
+        run: |
+          echo ${GIT_BRANCH}
 
   npm-publish:
     name: 发布到NPM
