@@ -4,6 +4,7 @@ on:
     tags: ["release-*"]
 
 env:
+  EVENT_NAME: ${{ github.event_name }}
   GIT_TAG: ${GITHUB_REF_NAME}
   GIT_BRANCH: release-${GIT_TAG}
 
@@ -11,6 +12,8 @@ jobs:
   log-changes:
     name: 记录变更文件
     runs-on: ubuntu-latest
+    env:
+      GIT_TAG_S: ${GITHUB_REF_NAME}
     steps:
       - name: 检出
         uses: actions/checkout@v3
@@ -19,3 +22,5 @@ jobs:
           echo ${GITHUB_REF_NAME}
           echo ${GIT_TAG}
           echo ${GIT_BRANCH}
+          echo ${EVENT_NAME}
+          echo ${GIT_TAG_S}
