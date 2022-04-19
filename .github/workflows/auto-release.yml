@@ -11,4 +11,6 @@ jobs:
       - name: 检出
         uses: actions/checkout@v3
       - name: 输出 tag name
-        run: echo ${{ GITHUB_REF_NAME }}
+        run: |
+          env
+          github
