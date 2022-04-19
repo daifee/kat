@@ -71,10 +71,9 @@ fix-js:
 
 
 update-package-version:
-	name=$(name)
-	version=$(version)
+	tag=$(tag)
 	$(YARN) install
-	$(NODE) ./scripts/release/update-package-version.js --name $(name) --version $(version)
+	$(NODE) ./scripts/release/update-package-version.js --tag $(name)
 
 pre-publish:
 	$(MAKE) bootstrap

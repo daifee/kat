@@ -1,20 +1,8 @@
 
 const fs = require('fs');
 const cliOptions = require('./cli-options');
-// const { execSync } = require('child_process');
 const { getPackage } = require('./workspaces');
-
-
-// function run(command, opts) {
-//   try {
-//     const stdout = execSync(command, opts);
-
-//     console.log(stdout.toString());
-//   } catch (err) {
-//     console.log(err.stdout.toString());
-//     throw err;
-//   }
-// }
+const { extractPackageNameAndVersion } = require('./utils');
 
 
 function writeJSON(filePath, obj) {
@@ -30,33 +18,22 @@ function updatePackageVersion(packagePath, packageObj, newVersion) {
   writeJSON(packagePath, newObj);
 }
 
-// function gitCommit(opts) {
-//   const tag = `release-${opts.name}-${opts.version}`;
-
-//   run('git config user.name "robot"');
-//   run('git config user.email "robot@daifee.com"');
-//   run('git add --all');
-//   run(`git commit -m "${tag}"`);
-//   run(`git tag ${tag}`);
-//   run('git push --tags');
-// }
-
-function exec(opts) {
-  const workspace = getPackage(opts.root, opts.name);
+function exec(options) {
+  const meta = extractPackageNameAndVersion(options.tag);
+  const workspace = getPackage(options.root, meta.name);
 
   if (!workspace) {
-    throw new Error(`不存在 package: ${opts.name}`);
+    throw new Error(`不存在 package: ${meta.name}`);
   }
 
   updatePackageVersion(
     workspace.packagePath,
     workspace.packageObj,
-    opts.version,
+    meta.version,
   );
-
-  // // commit
-  // gitCommit(opts);
 }
 
-const options = cliOptions();
-exec(options);
+const opts = cliOptions();
+
+
+exec(opts);
