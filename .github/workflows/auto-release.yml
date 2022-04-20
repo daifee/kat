@@ -6,13 +6,15 @@ on:
 
 
 jobs:
-  log-changes:
-    name: 记录变更文件
+  npm-publish:
+    name: 发布到NPM
     runs-on: ubuntu-latest
     steps:
-      - name: 检出
+      - name: 检出仓库
         uses: actions/checkout@v3
-      - name: 输出 tag name
+      - name: publish
         run: |
           echo "latest-commit: $(git log)"
           make npm-publish tag=${GITHUB_REF_NAME}
+        env:
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
