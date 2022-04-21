@@ -19,7 +19,7 @@ const stdout = execFileSync('./scripts/test.sh', {
   cwd: process.cwd(),
   env: {
     ...process.env,
-    PACKAGE: workspace.path.replace(/^packages\//, ''),
+    PACKAGE: workspace.path.replace(/.*\//, ''),
   },
   encoding: 'utf-8',
 });
