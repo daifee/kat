@@ -3,7 +3,7 @@ set -e
 
 BABEL=node_modules/.bin/babel
 
-function build {
+build() {
   echo "build: $1"
   $BABEL $1 --extensions ".ts" -d $2
 }

@@ -19,7 +19,7 @@ function updatePackageVersion(packagePath, packageObj, newVersion) {
 }
 
 function exec(options) {
-  const meta = extractPackageNameAndVersion(options.tag);
+  const meta = extractPackageNameAndVersion(options['release-tag']);
   const workspace = getPackage(options.root, meta.name);
 
   if (!workspace) {
