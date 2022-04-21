@@ -17,9 +17,9 @@ function getWorkspaceList(workspacePath) {
   const packageObj = readJSON(packagePath);
 
   let result = [{
-    path: workspacePath,
-    packagePath,
-    packageObj,
+    path: workspacePath, // packages/queue
+    packagePath, // packages/queue/package.json
+    packageObj, // {}
   }];
 
   if (!packageObj.workspaces) {

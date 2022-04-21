@@ -16,8 +16,8 @@ on:
 
 env:
   # 标签包含了「名称」、「版本」信息：@daifee/linked-list@0.0.0
-  GIT_TAG: "release-${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
-  GIT_BRANCH: "release/temp/${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
+  RELEASE_TAG: "release-${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
+  RELEASE_BRANCH: "release/temp/${{ github.event.inputs.name }}@${{ github.event.inputs.version }}"
 
 jobs:
   update-package-version:
@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
       - name: 更新 package.version
         run: |
-          make update-package-version tag=${GIT_TAG}
+          RELEASE_TAG=${RELEASE_TAG} make update-package-version
       - name: 查看文件变更
         run: git status
       - name: 提交代码
@@ -38,12 +38,12 @@ jobs:
           git config user.name "robot"
           git config user.email "robot@daifee.com"
           git add --all
-          git commit -m "${GIT_TAG}"
-          git tag ${GIT_TAG}
+          git commit -m "${RELEASE_TAG}"
+          git tag ${RELEASE_TAG}
       - name: 推送到Github
         run: |
-          echo ${GIT_BRANCH}
-          git push origin HEAD:${GIT_BRANCH} --follow-tags
+          echo ${RELEASE_BRANCH}
+          git push origin HEAD:${RELEASE_BRANCH} --follow-tags
 
   npm-publish:
     name: 发布到NPM
@@ -56,10 +56,10 @@ jobs:
         with:
           fetch-depth: 0
       - name: 检出分支
-        run: git checkout ${GIT_BRANCH}
+        run: git checkout ${RELEASE_BRANCH}
       - name: Publish
         run: |
           echo "latest-commit: $(git log)"
-          make npm-publish tag=${GIT_TAG}
+          RELEASE_TAG=${RELEASE_TAG} make npm-publish
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

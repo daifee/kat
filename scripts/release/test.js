@@ -1,6 +1,6 @@
 
 
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const cliOptions = require('./cli-options');
 const { getPackage } = require('./workspaces');
 const { extractPackageNameAndVersion } = require('./utils');
@@ -11,16 +11,14 @@ const meta = extractPackageNameAndVersion(opts['release-tag']);
 const workspace = getPackage(opts.root, meta.name);
 
 
-function run(command, options) {
-  try {
-    const stdout = execSync(command, options);
-    console.log(stdout.toString());
-  } catch (err) {
-    console.log(err.stdout.toString());
-    throw err;
-  }
-}
-
-run('yarn npm publish', {
-  cwd: workspace.path,
+const stdout = execFileSync('./scripts/test.sh', {
+  cwd: process.cwd(),
+  env: {
+    ...process.env,
+    PACKAGE: workspace.path.replace(/^packages\//, ''),
+  },
+  encoding: 'utf-8',
 });
+
+
+console.log(stdout);

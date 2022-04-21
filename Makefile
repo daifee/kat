@@ -1,7 +1,7 @@
 
 
 SOURCES = packages
-
+packages = queue linked-list
 NODE := yarn node
 BABEL := node_modules/.bin/babel
 YARN := yarn
@@ -10,32 +10,54 @@ JEST := node_modules/.bin/jest
 
 babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
-
-#
+# 启动
 bootstrap: clean
 	$(YARN) install
 	$(NODE) scripts/generators/tsconfig.pkg.js
 
 
+
+#####################
 # 构建
-build:
-	$(MAKE) build-no-bundle
+#####################
+build: clean-lib-all
+	./scripts/build.sh
+
+# build-no-bundle: clean-lib-all
+# 	$(BABEL) $(babelparams)
 
 
-build-no-bundle: clean-lib-all
-	$(BABEL) $(babelparams)
+
+#####################
+# 测试
+#####################
+test: lint test-only
+
+test-only:
+	./scripts/test.sh
 
 
+#####################
+# 检查代码
+#####################
+# lint
+lint: lint-js
 
-watch:
-	$(BABEL) $(babelparams) --watch
+lint-js:
+	$(ESLINT) --ext .js --ext .ts packages/ scripts/
+
+#####################
+# 修复代码
+#####################
+fix: fix-js
+
+fix-js:
+	$(ESLINT) packages/** scripts/** --ext .js --ext .ts --fix
 
 
-test: lint
-	$(JEST)
-
-
+#####################
 # 清除文件
+#####################
 clean:
 	$(MAKE) clean-lib-all
 	$(MAKE) clean-dependencies-all
@@ -58,22 +80,14 @@ clean-dependencies-all:
 
 
 
-# lint
-lint: lint-js
 
-lint-js:
-	$(ESLINT) packages/** scripts/** --ext .js --ext .ts
-
-fix: fix-js
-
-fix-js:
-	$(ESLINT) packages/** scripts/** --ext .js --ext .ts --fix
-
-
+#####################
+# 部署
+#####################
 update-package-version:
-	tag=$(tag)
 	$(YARN) install
-	$(NODE) ./scripts/release/update-package-version.js --tag $(tag)
+	$(NODE) ./scripts/release/update-package-version.js --release-tag $(RELEASE_TAG)
+
 
 pre-publish:
 	$(MAKE) bootstrap
@@ -81,8 +95,7 @@ pre-publish:
 	$(MAKE) test
 
 npm-publish: pre-publish
-	$(NODE) ./scripts/release/publish.js --tag $(tag)
-
+	$(NODE) ./scripts/release/publish.js --release-tag $(RELEASE_TAG)
 
 
 define clean-dependencies

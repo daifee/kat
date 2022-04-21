@@ -15,6 +15,6 @@ jobs:
       - name: publish
         run: |
           echo "latest-commit: $(git log)"
-          make npm-publish tag=${GITHUB_REF_NAME}
+          RELEASE_TAG=${GITHUB_REF_NAME} make npm-publish
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
