@@ -11,7 +11,7 @@ const meta = extractPackageNameAndVersion(opts['release-tag']);
 const workspace = getPackage(opts.root, meta.name);
 
 
-if (workspace) {
+if (!workspace) {
   throw new Error(`不存在 package: ${meta['release-tag']}`);
 }
 

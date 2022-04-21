@@ -91,8 +91,8 @@ update-package-version:
 
 pre-publish:
 	$(MAKE) bootstrap
-	$(MAKE) build
-	$(MAKE) test
+	$(NODE) ./scripts/release/build.js --release-tag $(RELEASE_TAG)
+	$(NODE) ./scripts/release/test.js --release-tag $(RELEASE_TAG)
 
 npm-publish:
 	$(MAKE) pre-publish
