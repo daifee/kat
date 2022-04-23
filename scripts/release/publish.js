@@ -19,8 +19,10 @@ if (!workspace) {
 function run(command, options) {
   try {
     const stdout = execSync(command, options);
+    // eslint-disable-next-line no-console
     console.log(stdout.toString());
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err.stdout.toString());
     throw err;
   }
