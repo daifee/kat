@@ -1,14 +1,10 @@
 
 
 SOURCES = packages
-packages = queue linked-list
 NODE := yarn node
-BABEL := node_modules/.bin/babel
 YARN := yarn
 ESLINT := node_modules/.bin/eslint
-JEST := node_modules/.bin/jest
 
-babelparams = --relative packages/*/src --extensions ".ts" -d ../lib
 
 # 启动
 bootstrap: clean
@@ -22,9 +18,6 @@ bootstrap: clean
 #####################
 build: clean-lib-all
 	./scripts/build.sh
-
-# build-no-bundle: clean-lib-all
-# 	$(BABEL) $(babelparams)
 
 
 
