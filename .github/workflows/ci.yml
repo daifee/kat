@@ -1,0 +1,24 @@
+name: 持续集成
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: 检测
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检测代码
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Bootstrap
+        run: make bootstrap
+      - name: Build
+        run: make build
+      - name: Lint
+        run: make lint
+      - name: Test
+        run: make test
