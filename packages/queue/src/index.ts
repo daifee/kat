@@ -2,12 +2,15 @@
 import LinkedList from '@daifee/linked-list';
 
 
-// https://en.wikipedia.org/wiki/Stack_(abstract_data_type)#Implementation
 export default class Queue<V> {
   protected items: LinkedList<V>;
 
   constructor() {
     this.items = new LinkedList();
+  }
+
+  get length(): number {
+    return this.items.size;
   }
 
   push(item: V) {
@@ -30,5 +33,9 @@ export default class Queue<V> {
     const item = this.items.getHead() as V;
 
     return item;
+  }
+
+  empty(): boolean {
+    return this.length === 0;
   }
 }

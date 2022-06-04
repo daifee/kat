@@ -47,7 +47,7 @@ export default class LinkedList<V> extends LinkedListIterator<V> {
     this.tail = null;
   }
 
-  get size() {
+  get size(): number {
     return this._size;
   }
 
@@ -219,7 +219,7 @@ export default class LinkedList<V> extends LinkedListIterator<V> {
     this.tail.next = null;
   }
 
-  empty() {
+  empty(): boolean {
     return this.size === 0;
   }
 }
