@@ -141,10 +141,6 @@ export default class LinkedList<V> extends LinkedListIterator<V> {
       count += 1;
     }
 
-    if (!cursor) {
-      throw new Error('不存在');
-    }
-
     return cursor?.val;
   }
 
