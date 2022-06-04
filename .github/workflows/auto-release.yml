@@ -17,9 +17,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: publish
+      - name: package信息
         run: |
-          echo "latest-commit: $(git log -1 --format='%H')"
-          RELEASE_TAG=${GITHUB_REF_NAME} make npm-publish
+          echo "Release tag: ${GITHUB_REF_NAME}"
+          echo "当前版本: $(git log -1 --format='%H')"
+      - name: Publish
+        run: RELEASE_TAG=${GITHUB_REF_NAME} make npm-publish
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
