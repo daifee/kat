@@ -186,4 +186,37 @@ describe('./linked-list/test/index.test.js', () => {
     expect(list.getHead()).toBe(received[0]);
     expect(list.getTail()).toBe(received[(received.length - 1)]);
   });
+
+  test('case-empty', () => {
+    const cases = [
+      ['addHead', [0]],
+      ['addTail', [1]],
+      ['add', [1, 2]],
+      ['addHead', [10]],
+      ['addTail', [11]],
+      ['add', [1, 12]],
+      ['deleteTail', []],
+      ['deleteHead', []],
+      ['addHead', [20]],
+      ['addTail', [21]],
+      ['delete', [2]],
+      ['delete', [2]],
+      ['add', [1, 22]],
+      // const expected = [20, 22, 12, 1, 21];
+
+      ['deleteHead', []],
+      ['deleteHead', []],
+      ['deleteHead', []],
+      ['deleteHead', []],
+      ['deleteHead', []],
+    ];
+
+    const list = runCases(cases);
+
+    const received = toArray(list);
+    expect(received).toEqual([]);
+    expect(list.size).toBe(0);
+
+    expect(list.empty()).toBe(true);
+  });
 });

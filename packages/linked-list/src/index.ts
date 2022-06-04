@@ -218,4 +218,8 @@ export default class LinkedList<V> extends LinkedListIterator<V> {
     this.tail = this.tail.prev as ListNode<V>;
     this.tail.next = null;
   }
+
+  empty() {
+    return this.size === 0;
+  }
 }
