@@ -1,6 +1,6 @@
 {
   "name": "@daifee/linked-list",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "LinkedList",
   "main": "./lib/index.js",
   "exports": {
