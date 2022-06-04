@@ -65,7 +65,7 @@ jobs:
         run: git checkout ${RELEASE_BRANCH}
       - name: Publish
         run: |
-          echo "latest-commit: $(git log)"
+          echo "latest-commit: $(git log -1 --format='%H')"
           RELEASE_TAG=${RELEASE_TAG} make npm-publish
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

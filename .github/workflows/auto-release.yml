@@ -19,7 +19,7 @@ jobs:
           node-version: 16
       - name: publish
         run: |
-          echo "latest-commit: $(git log)"
+          echo "latest-commit: $(git log -1 --format='%H')"
           RELEASE_TAG=${GITHUB_REF_NAME} make npm-publish
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
