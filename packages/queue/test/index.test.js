@@ -4,40 +4,41 @@ import Queue from '../lib';
 
 describe.only('./queue/test/index.test.js', () => {
   test('初始化对象', () => {
-    const q = new Queue();
+    const queue = new Queue();
 
-    expect(q.empty()).toBe(true);
-    expect(q.length).toBe(0);
+    expect(queue.empty()).toBe(true);
+    expect(queue.length).toBe(0);
   });
 
   test('case-1', () => {
-    const q = new Queue();
+    const queue = new Queue();
 
-    q.push(1);
+    queue.enqueue(1);
 
-    expect(q.top()).toBe(1);
+    expect(queue.first()).toBe(1);
+    expect(queue.last()).toBe(1);
 
-    expect(q.pop()).toBe(1);
-    expect(q.pop()).toBe(undefined);
-    expect(q.length).toBe(0);
+    expect(queue.dequeue()).toBe(1);
+    expect(queue.dequeue()).toBe(undefined);
+    expect(queue.length).toBe(0);
   });
 
   test('case-2', () => {
-    const q = new Queue();
+    const queue = new Queue();
 
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    q.push(4);
-    expect(q.length).toBe(4);
-    expect(q.pop()).toBe(4);
-    expect(q.pop()).toBe(3);
-    expect(q.pop()).toBe(2);
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.enqueue(4);
+    expect(queue.length).toBe(4);
+    expect(queue.dequeue()).toBe(1);
+    expect(queue.dequeue()).toBe(2);
+    expect(queue.dequeue()).toBe(3);
 
-    expect(q.top()).toBe(1);
-    expect(q.pop()).toBe(1);
+    expect(queue.first()).toBe(4);
+    expect(queue.dequeue()).toBe(4);
 
-    expect(q.top()).toBe(undefined);
-    expect(q.top()).toBe(undefined);
+    expect(queue.first()).toBe(undefined);
+    expect(queue.last()).toBe(undefined);
   });
 });

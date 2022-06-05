@@ -8,8 +8,9 @@
 
 **目标:**
 
-- [ ] LinkedList
-- [ ] Stack
+- [x] LinkedList
+- [x] Queue
+- [x] Stack
 - [ ] LRU
 
 

@@ -13,26 +13,31 @@ export default class Queue<V> {
     return this.items.size;
   }
 
-  push(item: V) {
-    this.items.addHead(item);
+  enqueue(item: V) {
+    this.items.addTail(item);
   }
 
-  pop(): V | undefined {
-    const item = this.top();
-
+  dequeue(): V | undefined {
+    const item = this.items.getHead();
     this.items.deleteHead();
 
     return item;
   }
 
-  top(): V | undefined {
-    if (!this.items.size) {
+  first(): V | undefined {
+    if (this.empty()) {
       return undefined;
     }
 
-    const item = this.items.getHead() as V;
+    return this.items.getHead();
+  }
 
-    return item;
+  last(): V | undefined {
+    if (this.empty()) {
+      return undefined;
+    }
+
+    return this.items.getTail();
   }
 
   empty(): boolean {
