@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "packageManager": "yarn@3.2.0",
   "description": "stack",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "author": "daifee",
   "license": "MIT",
   "dependencies": {
